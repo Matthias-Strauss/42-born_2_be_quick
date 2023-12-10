@@ -64,22 +64,25 @@ ${COLOR_RESET}"
     ###   ########.      
 "
 
-content='
-System Information at $(date)
-Operating System & Kernel Version: $(uname -a)
-Physical Processors: $(lscpu | grep '\''Socket(s):'\'' | awk '\''{print $2}'\'')
-Virtual Processors: $(lscpu | grep '\''CPU(s):'\'' | head -1 | awk '\''{print $2}'\'')
-Available RAM & Utilization: $(free -h | awk '\''/^Mem/ {print $4 "/" $2 " (" int($3/$2*100) "%)"}'\'')
-Available Memory & Utilization: $(free -h | awk '\''/^Swap/ {print $4 "/" $2 " (" int($3/$2*100) "%)"}'\'')
-Processor Utilization: $(top -bn1 | grep '\''%Cpu'\'' | awk '\''{print $2 + $4}'\'')%
-Last Reboot: $(who -b | awk '\''{print $3, $4}'\'')
-LVM Status: $(sudo lvdisplay > /dev/null 2>&1 && echo -e Active || echo -e Inactive)
-Active Connections: $(netstat -an | grep -c ESTABLISHED)
-Users Logged In: $(who | wc -l)
-IPv4 Address: $(hostname -I | awk '\''{print $1}'\'')
-MAC Address: $(ip link | awk '\''/ether/ {print $2;exit}'\'')
-Sudo Commands Executed: $(cat /var/log/auth.log* | grep -c '\''COMMAND=.*sudo'\'')
-'
+get_system-info(){
+echo "System Information at $(date)"
+echo "Operating System & Kernel Version: $(uname -a)"
+echo "Physical Processors: $(lscpu | grep '\''Socket(s):'\'' | awk '\''{print $2}'\'')"
+echo "Virtual Processors: $(lscpu | grep '\''CPU(s):'\'' | head -1 | awk '\''{print $2}'\'')"
+echo "Available RAM & Utilization: $(free -h | awk '\''/^Mem/ {print $4 "/" $2 " (" int($3/$2*100) "%)"}'\'')"
+echo "Available Memory & Utilization: $(free -h | awk '\''/^Swap/ {print $4 "/" $2 " (" int($3/$2*100) "%)"}'\'')"
+echo "Processor Utilization: $(top -bn1 | grep '\''%Cpu'\'' | awk '\''{print $2 + $4}'\'')%"
+echo "Last Reboot: $(who -b | awk '\''{print $3, $4}'\'')"
+echo "LVM Status: $(sudo lvdisplay > /dev/null 2>&1 && echo -e Active || echo -e Inactive)"
+echo "Active Connections: $(netstat -an | grep -c ESTABLISHED)"
+echo "Users Logged In: $(who | wc -l)"
+echo "IPv4 Address: $(hostname -I | awk '\''{print $1}'\'')"
+echo "MAC Address: $(ip link | awk '\''/ether/ {print $2;exit}'\'')"
+echo "Sudo Commands Executed: $(cat /var/log/auth.log* | grep -c '\''COMMAND=.*sudo'\'')"
+}
+
+content=$(get_system_info)
+wall "$content"
 
 
     # # Clear console
