@@ -1,3 +1,21 @@
+# born_2_be_quick
+
+## Why do the project if you can write a script to do the project for you?
+
+This is an abstraction of the 42 Heilbronn core curriculum project "born 2 be root", which intends to get students experience and understanding of Linux, virtual machines and setting up a server.
+
+This task seemed to simple at the time, so instead I built a 1-click script to take over the process for me. It can:
+• Set up new VirtualBox machine
+• Provision settings of the VM
+• Headless partitioning and installation of linux
+• Finish set up and creating user accounts, password rules, sudo config
+• Runs and configures the monitoring script asked for by the subject
+• Install and configure the bonus tasks:
+  • Install and configure a simple WordPress website with the following services: lighttpd, MariaDB, and PHP
+  • Install and configure ProtonVPN
+  
+
+
 REQUIREMENTS
 -- SELinux must be running at startup and its configuration has to be adapted for the project’s needs
 -- create at least 2 encrypted partitions using LVM
